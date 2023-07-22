@@ -16,11 +16,14 @@ import Editpizza from "./views/Editpizza";
 import Orderslist from "./views/Orderslist";
 import Pizzaslist from "./views/Pizzaslist";
 import Userslist from "./views/Userslist";
+import { Toaster } from 'react-hot-toast';
+
 function App() {
   return (
     <div className="App">
       <Navbar />
       <BrowserRouter>
+      <Toaster position='top-center' reverseOrder={false}/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/admin" element={<Admin />} >

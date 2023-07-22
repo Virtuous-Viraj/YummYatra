@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../actions/userActions";
 import Dropdown from 'react-bootstrap/Dropdown'
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { IoMdCart } from 'react-icons/io';
 export default function Navbar() {
   const cartstate = useSelector((state) => state.cartReducer);
   const userstate = useSelector((state) => state.loginUserReducer);
@@ -49,7 +49,7 @@ export default function Navbar() {
             )}
             {currentUser ?<li className="nav-item">
               <a className="nav-link" href="/cart">
-                Cart {cartstate.cartItems.length}
+                Cart<IoMdCart size={30} />{cartstate.cartItems.length}
               </a>
             </li> : <p></p>}
           </ul>

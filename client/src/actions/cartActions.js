@@ -1,3 +1,5 @@
+import { toast } from "react-hot-toast"
+
 export const addToCart=(pizza , quantity , varient)=>(dispatch , getState)=>{
 
     var cartItem = {
@@ -12,7 +14,7 @@ export const addToCart=(pizza , quantity , varient)=>(dispatch , getState)=>{
     }
     if(cartItem.quantity>10)
     {
-        alert('You cannot add more than 10 quantities')
+        toast.error('You cannot add more than 10 quantities')
     }
     else{
         if(cartItem.quantity<1)

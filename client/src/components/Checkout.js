@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 import { placeOrder } from '../actions/orderActions';
@@ -6,18 +6,19 @@ import { clearCart } from '../actions/cartActions';
 import Error from '../components/Error';
 import Loading from '../components/Loading';
 import Success from '../components/Success';
-import { useState, useEffect } from 'react';
 
 export default function Checkout({ subtotal }) {
   const orderstate = useSelector((state) => state.placeOrderReducer);
   const { loading, error, success } = orderstate;
   const dispatch = useDispatch();
   const [button, setButton] = useState(true);
+
   useEffect(() => {
     if (success) {
       dispatch(clearCart());
     }
   }, [success, dispatch]);
+
   function tokenHandler(token) {
     console.log(token);
     dispatch(placeOrder(token, subtotal));
@@ -36,9 +37,7 @@ export default function Checkout({ subtotal }) {
       {error && <Error error='Something went wrong' />}
       {success && <Success success='Order Placed Successfully!' />}
 
-      {success ? (
-        <p></p>
-      ) : (
+      {subtotal > 0 && !success && (
         <StripeCheckout
           amount={subtotal * 100}
           shippingAddress
